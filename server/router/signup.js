@@ -15,11 +15,10 @@ router.post("/", async (req, res) => {
     if (user) {
       res.status(400).send({ message: "User already exists" });
     }
-
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-    await new User({ ...req.body, password: hashPassword });
+    await new User({ ...req.body, password: hashPassword }).save();
 
     res.status(200).send({ message: "User created successfully" });
   } catch (error) {

@@ -148,3 +148,11 @@
     color: #0073b1;
     font-weight: 600;
 }
+
+.error__result {
+    color: red;
+}
+
+.successfully {
+    color: green;
+}
