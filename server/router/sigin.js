@@ -30,4 +30,8 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get('/', (req, res) => {
+  res.send(req.user);
+})
+
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import { IUserLogin } from '../types/interface';
 import { useHistory } from 'react-router-dom';
+import axios from  'axios'
 
 const useAuth = () => {
   const [data, setData] = useState<IUserLogin>({
@@ -28,12 +29,11 @@ const useAuth = () => {
     e.preventDefault()
 
     try {
-      const url = ''
-      const response = await fetch(url)
-      const data = response.json();
-      console.log(data)
-
-      history.push('/main')
+      const url: string = 'http://localhost:8080/api/sigin'
+      const { data: res } = await axios.post(url, data);
+      console.log(res)
+      login(res.token, res.user);
+      history.push('/main');
     } catch (error: any) {
       console.log(error)
         setErr(error)

@@ -1,14 +1,35 @@
 import "./Autorizations.css";
 
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { Show } from "../../../helper/Show";
+import GoogleLogin from 'react-google-login'
+import {gapi} from 'gapi-script'
 
 const Sigin: FC = () => {
   const {data, err, handleChange, handleSubmit} = useAuth();
   const [show, setShow] = useState('Show')
   const {showPasswordHandler} = Show()
+
+  const responseGoogle = (response: any) => {
+    console.log(response)
+  }
+
+  const responseErrorGoogle = (response: any) => { 
+    console.log(response)
+  }
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: '270521151776-ebm0n7oahpn7c4ta978uie6udr6o1ejc.apps.googleusercontent.com',
+        scope: 'email',
+      });
+    }
+
+    gapi.load('client:auth2', start);
+  }, []);
   return (
     <>
       <div className="main sigin">
@@ -84,6 +105,17 @@ const Sigin: FC = () => {
               </svg>
               <span>Sigin, using Google</span>
             </button>
+
+            <GoogleLogin
+              clientId="270521151776-ebm0n7oahpn7c4ta978uie6udr6o1ejc.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseErrorGoogle}
+              className='btn'
+              cookiePolicy={'single_host_origin'}
+              scope="email"
+            >
+              <span>Sigin, using Google</span>
+            </GoogleLogin>
 
             <button className="btn">
               <svg
