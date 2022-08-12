@@ -6,6 +6,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Show } from "../../../helper/Show";
 import GoogleLogin from 'react-google-login'
 import {gapi} from 'gapi-script'
+import axios from "axios";
 
 const Sigin: FC = () => {
   const {data, err, handleChange, handleSubmit} = useAuth();
@@ -13,7 +14,13 @@ const Sigin: FC = () => {
   const {showPasswordHandler} = Show()
 
   const responseGoogle = (response: any) => {
-    console.log(response)
+    axios({
+      method: 'POST',
+      url: 'http://localhost:8080/api/googlelogin',
+      data: {tokenId: response.tokenId}
+    }).then(res => {
+      console.log(res)
+    })
   }
 
   const responseErrorGoogle = (response: any) => { 
