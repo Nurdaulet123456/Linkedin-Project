@@ -7,23 +7,23 @@ router.post("/", async (req, res) => {
     const { error } = valideteUser(req.body);
 
     if (error) {
-      res.status(400).send({ message: error.details[0].message });
+      return res.status(400).json({ message: error.details[0].message });
     }
 
     const user = await User.findOne({ email: req.body.email });
 
     if (user) {
-      res.status(400).send({ message: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     await new User({ ...req.body, password: hashPassword }).save();
 
-    res.status(200).send({ message: "User created successfully" });
+    return res.status(200).json({ message: "User created successfully" });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ message: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 });
 

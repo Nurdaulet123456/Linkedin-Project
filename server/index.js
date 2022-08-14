@@ -9,6 +9,7 @@ const signup = require('./router/signup')
 const sigin = require('./router/sigin')
 const deleteUser = require('./router/deleteUser')
 const googlelogin = require('./router/google.login');
+const forgetPassword = require('./router/forgetPasswords');
 
 app.use(express.json({extended: true}))
 app.use(cors())
@@ -21,6 +22,7 @@ app.use('/api/signup', signup)
 app.use('/api/sigin', sigin)
 app.use('/api/delete', deleteUser)
 app.use('/api/googlelogin', googlelogin)
+app.use('/api/forgetPasswords', forgetPassword)
 
 const port = process.env.PORT || 8080
 
