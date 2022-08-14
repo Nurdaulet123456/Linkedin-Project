@@ -5,11 +5,19 @@ import Sigin from "../Pages/Autorizations/Sigin";
 import Signup from "../Pages/Autorizations/Signup";
 import MainPage from "../Pages/Main-Page/Main.Page";
 import HeadersLogin from "../Headers/Headers.Login";
+import HeadersLogout from "../Headers/Headers.Logout";
+import ForgetPassword from "../Pages/Autorizations/ForgetPassword";
 
 const App: React.FC = () => {
+  
   return (
     <>
-      <HeadersLogin />
+    {
+      localStorage.getItem('GoogleToken')
+       ?
+       <HeadersLogout /> :
+       <HeadersLogin />
+    }
       <Router>
         <Switch>
           <PrivateRoutes exact path={"/main"}>
@@ -20,6 +28,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={"/signup"}>
             <Signup />
+          </Route>
+          <Route exact path={"/forgetPassword"}>
+            <ForgetPassword />
           </Route>
         </Switch>
       </Router>

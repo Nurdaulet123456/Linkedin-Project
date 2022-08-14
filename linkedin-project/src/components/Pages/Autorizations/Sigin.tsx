@@ -78,9 +78,9 @@ const Sigin: FC = () => {
                 </span>
               </div>
 
-              <a className="forget__password" href="/">
+              <Link className="forget__password" to={'/forgetPassword'}>
                 Forget password ?
-              </a>
+              </Link>
               <button className="button" type="submit">Sigin</button>
               {err && <div className="error__result">{err}</div>}
             </form>

@@ -8,7 +8,7 @@ import {Show} from '../../../helper/Show'
 let message: any;
 const Signup: React.FC = () => {
   const [login, setLogin] = useState<IUser>({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -36,7 +36,7 @@ const Signup: React.FC = () => {
       message = form.message;
 
       setLogin({
-        username: "",
+        name: "",
         email: "",
         password: "",
       });
@@ -60,9 +60,9 @@ const Signup: React.FC = () => {
                 <input
                   type="text"
                   className="input"
-                  name="username"
+                  name="name"
                   placeholder="Username"
-                  value={login.username}
+                  value={login.name}
                   onChange={onChangeHandler}
                 />
               </div>

@@ -1,5 +1,4 @@
 import cookie from 'js-cookie';
-import { GoogleLogout } from 'react-google-login';
 
 export const setCookie = (key: string, value: any) => {
     if (window !== undefined) {
