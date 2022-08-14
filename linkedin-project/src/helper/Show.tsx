@@ -1,20 +1,16 @@
+import { useState } from "react";
 
 const Show = () => {
-    const showPasswordHandler = (setShow: any) => {
-        const password: any = document.querySelector("#password");
-    
-        if (password.type === "password") {
-          password.type = "text";
-          setShow('Password');
-        } else {
-          password.type = "password";
-          setShow('Show');
-        }
-    
-        console.log('asdasd')
-      };
+  const [passwordShown, setPasswordShown] = useState<boolean | null>(false);
 
-      return {showPasswordHandler}
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  return {
+    passwordShown,
+    togglePassword
+  }
 }
 
 export {Show};

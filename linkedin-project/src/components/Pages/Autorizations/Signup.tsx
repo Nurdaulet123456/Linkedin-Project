@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IUser } from "../../../types/interface";
 import { useHttp } from "../../../hooks/http.hooks";
@@ -12,10 +12,9 @@ const Signup: React.FC = () => {
     email: "",
     password: "",
   });
-  const [show, setShow] = useState<String>('Show')
   const { request, err, setErr, clearError } = useHttp();
   const history = useHistory();
-  const {showPasswordHandler} = Show();
+  const {togglePassword, passwordShown} = Show();
 
   useEffect(() => {
     clearError();
@@ -82,7 +81,7 @@ const Signup: React.FC = () => {
               <div className="password">
                 <input
                   id="password"
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   className="input"
                   name="password"
                   placeholder="Password"
@@ -90,12 +89,12 @@ const Signup: React.FC = () => {
                   onChange={onChangeHandler}
                 />
 
-                <a
+                <span
                   className="show__password"
-                  onClick={() => showPasswordHandler(setShow)}
+                  onClick={togglePassword}
                 >
-                  {show}
-                </a>
+                  {passwordShown ? 'Show' : 'Hide'}
+                </span>
               </div>
 
               {err ? (

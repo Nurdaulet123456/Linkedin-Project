@@ -1,6 +1,6 @@
 import "./Autorizations.css";
 
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { Show } from "../../../helper/Show";
@@ -10,8 +10,7 @@ import axios from "axios";
 
 const Sigin: FC = () => {
   const {loginAuth, err, handleChange, handleSubmit} = useAuth();
-  const [show, setShow] = useState('Show')
-  const {showPasswordHandler} = Show()
+  const {togglePassword, passwordShown} = Show()
 
   const responseGoogle = (response: any) => {
     axios({
@@ -65,18 +64,18 @@ const Sigin: FC = () => {
               <div className="password">
                 <input
                   id="password"
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   className="input"
                   name="password"
                   placeholder="Password"
                   value={loginAuth.password}
                   onChange={handleChange}
                 />
-                <a 
+                <span  
                 className="show__password"
-                onClick={() => showPasswordHandler(setShow)}>
-                  {show}
-                </a>
+                onClick={togglePassword}>
+                  {!passwordShown ? 'Show' : 'Hide'}
+                </span>
               </div>
 
               <a className="forget__password" href="/">
