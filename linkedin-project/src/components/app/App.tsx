@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PrivateRoutes from "../../utils/PrivateRoutes";
 import Sigin from "../Pages/Autorizations/Sigin";
 import Signup from "../Pages/Autorizations/Signup";
 import MainPage from "../Pages/Main-Page/Main.Page";
@@ -11,9 +12,9 @@ const App: React.FC = () => {
       <HeadersLogin />
       <Router>
         <Switch>
-          <Route exact path={"/main"}>
+          <PrivateRoutes exact path={"/main"}>
             <MainPage />
-          </Route>
+          </PrivateRoutes>
           <Route exact path={"/"}>
             <Sigin />
           </Route>

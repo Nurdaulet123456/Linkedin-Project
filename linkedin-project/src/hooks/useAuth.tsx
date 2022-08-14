@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from  'axios'
 
 const useAuth = () => {
-  const [data, setData] = useState<IUserLogin>({
+  const [loginAuth, setLoginAuth] = useState<IUserLogin>({
     email: '',
     password: '',
   })
@@ -19,8 +19,8 @@ const useAuth = () => {
   const [err, setErr] = useState<String | null>('')
 
   const handleChange = ({currentTarget: input}: any) => {
-    setData({
-      ...data,
+    setLoginAuth({
+      ...loginAuth,
       [input.name]: input.value
     })
   } 
@@ -30,7 +30,7 @@ const useAuth = () => {
 
     try {
       const url: string = 'http://localhost:8080/api/sigin'
-      const { data: res } = await axios.post(url, data);
+      const { data: res } = await axios.post(url, loginAuth);
       console.log(res)
       login(res.token, res.user);
       history.push('/main');
@@ -41,7 +41,7 @@ const useAuth = () => {
   }
 
   return {
-    data, 
+    loginAuth, 
     err,
     handleChange,
     handleSubmit

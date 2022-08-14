@@ -9,7 +9,7 @@ import {gapi} from 'gapi-script'
 import axios from "axios";
 
 const Sigin: FC = () => {
-  const {data, err, handleChange, handleSubmit} = useAuth();
+  const {loginAuth, err, handleChange, handleSubmit} = useAuth();
   const [show, setShow] = useState('Show')
   const {showPasswordHandler} = Show()
 
@@ -17,15 +17,17 @@ const Sigin: FC = () => {
     axios({
       method: 'POST',
       url: 'http://localhost:8080/api/googlelogin',
-      data: {tokenId: response.tokenId}
+      data: { idToken: response.tokenId }
     }).then(res => {
-      console.log(res)
-    })
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      localStorage.setItem('GoogleToken', res.data.token)
+    }).catch(error => {
+      console.log('GOOGLE SIGNIN ERROR', error.response);
+    });
+
+    window.location.href = '/main'
   }
 
-  const responseErrorGoogle = (response: any) => { 
-    console.log(response)
-  }
 
   useEffect(() => {
     function start() {
@@ -55,7 +57,7 @@ const Sigin: FC = () => {
                   className="input"
                   name="email"
                   placeholder="Email Address"
-                  value={data.email}
+                  value={loginAuth.email}
                   onChange={handleChange}
                 />
               </div>
@@ -67,7 +69,7 @@ const Sigin: FC = () => {
                   className="input"
                   name="password"
                   placeholder="Password"
-                  value={data.password}
+                  value={loginAuth.password}
                   onChange={handleChange}
                 />
                 <a 
@@ -85,8 +87,17 @@ const Sigin: FC = () => {
             </form>
             <span className="or">Or</span>
 
-            <button className="btn">
-              <svg
+            <GoogleLogin
+              clientId="270521151776-ebm0n7oahpn7c4ta978uie6udr6o1ejc.apps.googleusercontent.com"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              render={renderProps => (
+                <button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  className='btn'
+                >
+                  <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
                 height="24"
@@ -111,13 +122,8 @@ const Sigin: FC = () => {
                 ></path>
               </svg>
               <span>Sigin, using Google</span>
-            </button>
-
-            <GoogleLogin
-              clientId="270521151776-ebm0n7oahpn7c4ta978uie6udr6o1ejc.apps.googleusercontent.com"
-              onSuccess={responseGoogle}
-              onFailure={responseErrorGoogle}
-              className='btn'
+                </button>
+              )}
               cookiePolicy={'single_host_origin'}
               scope="email"
             >
