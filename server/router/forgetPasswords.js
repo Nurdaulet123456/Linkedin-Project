@@ -1,3 +1,4 @@
+require('dotenv').config();
 const router = require('express').Router();
 const { validationResult } = require('express-validator');
 const { User } = require('../module/User');

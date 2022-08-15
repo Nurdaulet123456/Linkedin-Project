@@ -1,3 +1,4 @@
+require('dotenv').config();
 const router = require('express').Router();
 const {OAuth2Client} = require('google-auth-library')
 const {User} = require('../module/User')

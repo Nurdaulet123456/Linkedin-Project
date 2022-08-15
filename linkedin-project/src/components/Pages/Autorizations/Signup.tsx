@@ -20,7 +20,7 @@ const Signup: React.FC = () => {
     clearError();
   }, [err, clearError])
 
-  const onChangeHandler = ({ currentTarget: input }: any) => {
+  const onChangeHandler = ({ currentTarget: input }: React.FormEvent<HTMLInputElement>) => {
     setLogin({
       ...login,
       [input.name]: input.value,
