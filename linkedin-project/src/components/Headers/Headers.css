@@ -1,6 +1,12 @@
 .header {
     padding: 0 3rem;
     background-color: var(--bcColor);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200000;
 }
 
 .header__inner {
@@ -8,4 +14,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-logout {
+    height: 60px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo > input {
+    width: 100%;
+    height: 34px;
+    font-weight: 400;
+    font-size: 14px;
+    
+    background-color: #eef3f8;
+    border-radius: .4rem;
+    
+    border: none;
+    
+    padding: 0 .8rem 0 1.2rem;
+
+    margin-left: 1.2rem;
+}
+
+.header__link > ul {
+    display: flex;
+    align-items: center;
+}
+
+.header__link > ul > li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-left: 4rem;
+}
+
+.nav__logo > img {
+    border-radius: 50%;
 }

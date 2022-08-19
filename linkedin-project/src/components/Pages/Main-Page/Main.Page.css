@@ -1,0 +1,10 @@
+.main {
+    height: 100vh;
+    background-color: #f4f2ed;
+    padding-top: 8rem;
+}
+
+.main__inner {
+    display: flex;
+    justify-content: space-between;
+}

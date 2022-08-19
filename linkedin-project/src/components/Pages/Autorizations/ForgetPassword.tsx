@@ -31,7 +31,7 @@ const ForgetPassword: React.FC = () => {
                         ...forget,
                         email: ''
                     })
-
+                    console.log(res)
                     toast.success(`Please check your email`);
                 })
                 .catch(err => {

@@ -1,10 +1,14 @@
+import './Add.css';
+
 import React from 'react';
 
 const AddPost: React.FC = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <div className="add">
+      asdasdasdasdasdasdasdasd
+      </div>
+    </>
   );
 }
 

@@ -93,7 +93,7 @@ const Signup: React.FC = () => {
                   className="show__password"
                   onClick={togglePassword}
                 >
-                  {passwordShown ? 'Show' : 'Hide'}
+                  {!passwordShown ? 'Show' : 'Hide'}
                 </span>
               </div>
 
